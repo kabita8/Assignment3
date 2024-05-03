@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Vidhyalaya.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Dbcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace Vidhyalaya.Migrations
                     Label = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ClassTeacher = table.Column<string>(type: "TEXT", nullable: false),
-                    Medium = table.Column<string>(type: "TEXT", nullable: false),
+                    Medium = table.Column<int>(type: "INTEGER", nullable: false),
                     Subjects = table.Column<string>(type: "TEXT", nullable: false),
                     SessionYear = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -28,16 +28,18 @@ namespace Vidhyalaya.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Guardian",
+                name: "GuardianDetails",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     Contact = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Guardian", x => x.Name);
+                    table.PrimaryKey("PK_GuardianDetails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,24 +52,26 @@ namespace Vidhyalaya.Migrations
                     Address = table.Column<string>(type: "TEXT", nullable: false),
                     sex = table.Column<int>(type: "INTEGER", nullable: false),
                     Dob = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Photo = table.Column<byte[]>(type: "BLOB", nullable: false),
-                    GuardianDetailsName = table.Column<string>(type: "TEXT", nullable: false)
+                    Photo = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Student", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Student_Guardian_GuardianDetailsName",
-                        column: x => x.GuardianDetailsName,
-                        principalTable: "Guardian",
-                        principalColumn: "Name",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Student_GuardianDetailsName",
-                table: "Student",
-                column: "GuardianDetailsName");
+            migrationBuilder.CreateTable(
+                name: "Subjects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SubjectName = table.Column<string>(type: "TEXT", nullable: false),
+                    code = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subjects", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -77,10 +81,13 @@ namespace Vidhyalaya.Migrations
                 name: "Grade");
 
             migrationBuilder.DropTable(
+                name: "GuardianDetails");
+
+            migrationBuilder.DropTable(
                 name: "Student");
 
             migrationBuilder.DropTable(
-                name: "Guardian");
+                name: "Subjects");
         }
     }
 }

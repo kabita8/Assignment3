@@ -1,0 +1,59 @@
+@page
+@model Vidhyalaya.Pages_Students.IndexModel
+
+
+<p>
+    <a href="/students/create"class="btn btn-success"> <i class="bi bi-plus-lg"></i>Add Student</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Photo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Student) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Photo)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="bi bi-pen"></i>Edit</a> 
+                <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-success"><i class="bi bi-eye-fill"></i>Details</a> 
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="bi bi-trash3"></i>Delete</a>
+            </td>
+        </tr>
+}
+
+
+
+    </tbody>
+</table>
+

@@ -1,0 +1,43 @@
+@page
+@model Vidhyalaya.Pages_Grades.CreateModel
+
+
+
+<h4>Grade</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Grade.ClassTeacher" class="control-label"></label>
+                <input asp-for="Grade.ClassTeacher" class="form-control" />
+                <span asp-validation-for="Grade.ClassTeacher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Grade.Medium" class="control-label"></label>
+                <select asp-for="Grade.Medium" class="form-control"></select>
+                <span asp-validation-for="Grade.Medium" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Grade.Subjects" class="control-label"></label>
+                <input asp-for="Grade.Subjects" class="form-control" />
+                <span asp-validation-for="Grade.Subjects" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Grade.SessionYear" class="control-label"></label>
+                <input asp-for="Grade.SessionYear" class="form-control" />
+                <span asp-validation-for="Grade.SessionYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+
