@@ -50,9 +50,10 @@ namespace Vidhyalaya.Pages_Students
             var student = await _context.Student.FindAsync(id);
             if (student != null)
             {
-                Student = student;
-                _context.Student.Remove(Student);
-                await _context.SaveChangesAsync();
+                student.IsActive = false;
+                //Student = student;
+                // _context.Student.Remove(Student);
+                 await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

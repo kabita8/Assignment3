@@ -15,13 +15,16 @@
                 @Html.DisplayNameFor(model => model.Student[0].Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Student[0].sex)
+                @Html.DisplayNameFor(model => model.Student[0].Gender)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].Dob)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].IsActive)
             </th>
             <th></th>
         </tr>
@@ -36,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.sex)
+                @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Dob)
@@ -44,6 +47,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Photo)
             </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="bi bi-pen"></i>Edit</a> 
                 <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-success"><i class="bi bi-eye-fill"></i>Details</a> 
