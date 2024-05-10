@@ -21,7 +21,7 @@ namespace Vidhyalaya.Pages_Students
 
         public async Task OnGetAsync()
         {
-            Student = await _context.Student.ToListAsync();
+            Student = await _context.Students.Include(x=>x.Grade).ToListAsync();
         }
     }
 }

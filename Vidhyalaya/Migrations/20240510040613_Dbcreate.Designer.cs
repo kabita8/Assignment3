@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Vidhyalaya.Migrations
 {
     [DbContext(typeof(VidhyalayaDbContext))]
-    [Migration("20240504154439_Dbcreate")]
+    [Migration("20240510040613_Dbcreate")]
     partial class Dbcreate
     {
         /// <inheritdoc />
@@ -35,13 +35,13 @@ namespace Vidhyalaya.Migrations
                     b.Property<DateTime>("SessionYear")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Subjects")
+                    b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Label");
 
-                    b.ToTable("Grade");
+                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("Guardian", b =>
@@ -62,7 +62,12 @@ namespace Vidhyalaya.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("GuardianDetails");
                 });
@@ -84,6 +89,9 @@ namespace Vidhyalaya.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("GradeLabel")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
@@ -96,7 +104,27 @@ namespace Vidhyalaya.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Student");
+                    b.HasIndex("GradeLabel");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("Guardian", b =>
+                {
+                    b.HasOne("Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Student", b =>
+                {
+                    b.HasOne("Grade", "Grade")
+                        .WithMany()
+                        .HasForeignKey("GradeLabel");
+
+                    b.Navigation("Grade");
                 });
 #pragma warning restore 612, 618
         }

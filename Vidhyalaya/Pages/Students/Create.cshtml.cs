@@ -19,11 +19,15 @@ namespace Vidhyalaya.Pages_Students
 
         public IActionResult OnGet()
         {
+            Grades = _context.Grades
+            .Select(x => new SelectListItem {Text = x.ClassTeacher, Value = x.Label.ToString()})
+            .ToList();
             return Page();
         }
 
         [BindProperty]
         public Student Student { get; set; } = default!;
+        public List<SelectListItem> Grades { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -33,7 +37,7 @@ namespace Vidhyalaya.Pages_Students
                 return Page();
             }
 
-            _context.Student.Add(Student);
+            _context.Students.Add(Student);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

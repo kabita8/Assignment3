@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Vidhyalaya.Pages_Students
+namespace Vidhyalaya.Pages_Guardians
 {
     public class DetailsModel : PageModel
     {
@@ -17,7 +17,7 @@ namespace Vidhyalaya.Pages_Students
             _context = context;
         }
 
-        public Student Student { get; set; } = default!;
+        public Guardian Guardian { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -26,14 +26,14 @@ namespace Vidhyalaya.Pages_Students
                 return NotFound();
             }
 
-            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
+            var guardian = await _context.GuardianDetails.FirstOrDefaultAsync(m => m.Id == id);
+            if (guardian == null)
             {
                 return NotFound();
             }
             else
             {
-                Student = student;
+                Guardian = guardian;
             }
             return Page();
         }

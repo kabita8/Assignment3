@@ -5,12 +5,13 @@ public class Grade
 public int Label { get; set; }
 public string ClassTeacher { get; set; }
 public Medium Medium { get; set; }
-public string Subjects {get; set; }
+public string Subject {get; set; }
 public DateTime SessionYear {get; set;}
 }
 
 public enum Medium
    {
     English,
-    Nepali
+    Nepali,
+    Others
    }

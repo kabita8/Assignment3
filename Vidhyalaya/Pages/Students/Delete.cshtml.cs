@@ -27,7 +27,7 @@ namespace Vidhyalaya.Pages_Students
                 return NotFound();
             }
 
-            var student = await _context.Student.FirstOrDefaultAsync(m => m.Id == id);
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
 
             if (student == null)
             {
@@ -47,7 +47,7 @@ namespace Vidhyalaya.Pages_Students
                 return NotFound();
             }
 
-            var student = await _context.Student.FindAsync(id);
+            var student = await _context.Students.FindAsync(id);
             if (student != null)
             {
                 student.IsActive = false;

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Vidhyalaya.Pages_Grades
+namespace Vidhyalaya.Pages_Guardians
 {
     public class CreateModel : PageModel
     {
@@ -19,11 +19,15 @@ namespace Vidhyalaya.Pages_Grades
 
         public IActionResult OnGet()
         {
-            return Page();
+        Students=_context.Students
+        .Select(x=> new SelectListItem {Text=x.Name, Value=x.Id.ToString()})
+        .ToList();
+        return Page();
         }
 
         [BindProperty]
-        public Grade Grade { get; set; } = default!;
+        public Guardian Guardian { get; set; } = default!;
+        public List<SelectListItem> Students {get; set;}
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -33,7 +37,7 @@ namespace Vidhyalaya.Pages_Grades
                 return Page();
             }
 
-            _context.Grades.Add(Grade);
+            _context.GuardianDetails.Add(Guardian);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

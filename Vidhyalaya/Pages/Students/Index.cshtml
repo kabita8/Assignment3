@@ -8,8 +8,13 @@
 <table class="table">
     <thead>
         <tr>
+            <th scope="col">Id</th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].Name)
+            </th>
+              <th>
+                ClassTeacher
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].Address)
@@ -30,11 +35,16 @@
         </tr>
     </thead>
     <tbody>
+        @{
+            int counter = 1;
+        }
 @foreach (var item in Model.Student) {
         <tr>
+            <th scope="row">@(counter++)</th>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+            <td>@(item.Grade?.ClassTeacher ?? "N/A")</td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
@@ -47,7 +57,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Photo)
             </td>
-            <td>
+            
+            <td class ="btn btn-success">
                     @Html.DisplayFor(modelItem => item.IsActive)
                 </td>
             <td>

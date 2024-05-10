@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Vidhyalaya.Pages_Grades
+namespace Vidhyalaya.Pages_Guardians
 {
     public class DeleteModel : PageModel
     {
@@ -18,7 +18,7 @@ namespace Vidhyalaya.Pages_Grades
         }
 
         [BindProperty]
-        public Grade Grade { get; set; } = default!;
+        public Guardian Guardian { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,15 +27,15 @@ namespace Vidhyalaya.Pages_Grades
                 return NotFound();
             }
 
-            var grade = await _context.Grades.FirstOrDefaultAsync(m => m.Label == id);
+            var guardian = await _context.GuardianDetails.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (grade == null)
+            if (guardian == null)
             {
                 return NotFound();
             }
             else
             {
-                Grade = grade;
+                Guardian = guardian;
             }
             return Page();
         }
@@ -47,11 +47,11 @@ namespace Vidhyalaya.Pages_Grades
                 return NotFound();
             }
 
-            var grade = await _context.Grades.FindAsync(id);
-            if (grade != null)
+            var guardian = await _context.GuardianDetails.FindAsync(id);
+            if (guardian != null)
             {
-                Grade = grade;
-                _context.Grades.Remove(Grade);
+                Guardian = guardian;
+                _context.GuardianDetails.Remove(Guardian);
                 await _context.SaveChangesAsync();
             }
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace Vidhyalaya.Pages_Grades
+namespace Vidhyalaya.Pages_Guardians
 {
     public class EditModel : PageModel
     {
@@ -19,21 +19,25 @@ namespace Vidhyalaya.Pages_Grades
         }
 
         [BindProperty]
-        public Grade Grade { get; set; } = default!;
-
+        public Guardian Guardian { get; set; } = default!;
+        public List<SelectListItem> Students { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            Students=_context.Students
+            .Select(x=> new SelectListItem{Text=x.Name, Value=x.Id.ToString()})
+            .ToList();
             if (id == null)
             {
                 return NotFound();
             }
 
-            var grade =  await _context.Grades.FirstOrDefaultAsync(m => m.Label == id);
-            if (grade == null)
+            var guardian =  await _context.GuardianDetails.FirstOrDefaultAsync(m => m.Id == id);
+            if (guardian == null)
             {
                 return NotFound();
             }
-            Grade = grade;
+            Guardian = guardian;
+           ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id");
             return Page();
         }
 
@@ -46,7 +50,7 @@ namespace Vidhyalaya.Pages_Grades
                 return Page();
             }
 
-            _context.Attach(Grade).State = EntityState.Modified;
+            _context.Attach(Guardian).State = EntityState.Modified;
 
             try
             {
@@ -54,7 +58,7 @@ namespace Vidhyalaya.Pages_Grades
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GradeExists(Grade.Label))
+                if (!GuardianExists(Guardian.Id))
                 {
                     return NotFound();
                 }
@@ -67,9 +71,9 @@ namespace Vidhyalaya.Pages_Grades
             return RedirectToPage("./Index");
         }
 
-        private bool GradeExists(int id)
+        private bool GuardianExists(int id)
         {
-            return _context.Grades.Any(e => e.Label == id);
+            return _context.GuardianDetails.Any(e => e.Id == id);
         }
     }
 }

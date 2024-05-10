@@ -19,13 +19,9 @@
                 <input asp-for="Student.Address" class="form-control" />
                 <span asp-validation-for="Student.Address" class="text-danger"></span>
             </div>
-            @* <div class="form-group">
-                <label asp-for="Student.sex" class="control-label"></label>
-                <select asp-for="Student.sex" class="form-control"></select>
-                <span asp-validation-for="Student.sex" class="text-danger"></span>
-            </div> *@
+            
             <div class="form-group">
-                <label asp-for="Student.Gender" class="control-label"></label>
+                <label asp-for="Student.Gender" class="control-label">Gender :</label>
 
                 <label>
                     <input type="radio" asp-for="Student.Gender" value="Male" /> Male
@@ -53,15 +49,19 @@
                 </label>
             </div>
             <div class="form-group">
+                <label class="control-label">ClassTeacher</label>
+                <select asp-for="Student.GradeLabel" asp-items="Model.Grades" class="form-control">
+                <option selected value="@null">Select Teacher...</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
-                 <a asp-page="Index">Back to List</a>
+                 <a asp-page="Index" class="btn btn-info">Back to List </a>
             </div>
         </form>
     </div>
 </div>
 
-@* <div>
-    <a asp-page="Index">Back to List</a>
-</div> *@
+
 
 

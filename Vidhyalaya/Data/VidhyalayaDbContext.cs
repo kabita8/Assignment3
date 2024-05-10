@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 public class VidhyalayaDbContext : DbContext
 {
-    public DbSet<Grade> Grade { get; set; }
-    public DbSet<Student> Student {get; set;}
+    public DbSet<Grade> Grades { get; set; }
+    public DbSet<Student> Students {get; set;}
     public DbSet<Guardian> GuardianDetails {get; set;}
     
     // protected override void OnModelCreating(ModelBuilder modelBuilder)
