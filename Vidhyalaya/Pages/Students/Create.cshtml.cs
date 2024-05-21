@@ -19,16 +19,13 @@ namespace Vidhyalaya.Pages_Students
 
         public IActionResult OnGet()
         {
-            Grades = _context.Grades
-            .Select(x => new SelectListItem {Text = x.ClassTeacher, Value = x.Label.ToString()})
-            .ToList();
+            ViewData["GradeId"] = new SelectList(_context.Grades, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
         public Student Student { get; set; } = default!;
-        public List<SelectListItem> Grades { get; set; }
-
+       
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {

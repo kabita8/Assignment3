@@ -26,7 +26,7 @@ namespace Vidhyalaya.Pages_Grades
                 return NotFound();
             }
 
-            var grade = await _context.Grades.FirstOrDefaultAsync(m => m.Label == id);
+            var grade = await _context.Grades.FirstOrDefaultAsync(m => m.Id == id);
             if (grade == null)
             {
                 return NotFound();

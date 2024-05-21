@@ -3,7 +3,7 @@
 
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-success"><i class="bi bi-plus-lg"></i>Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -17,16 +17,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Guardian[0].Contact)
             </th>
-            @* <th>
+            <th>
                 @Html.DisplayNameFor(model => model.Guardian[0].Student)
-            </th> *@
+            </th> 
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Guardian) {
         <tr>
-            <td>@(item.Student?.Name ?? "N/A")</td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -36,13 +36,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Contact)
             </td>
-            @* <td>
-                @Html.DisplayFor(modelItem => item.Student.Id)
-            </td> *@
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Student.Id)
+            </td> 
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="bi bi-pen"></i>Edit</a> 
+                <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-success"><i class="bi bi-eye-fill"></i>Details</a> 
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="bi bi-trash3"></i>Delete</a>
             </td>
         </tr>
 }

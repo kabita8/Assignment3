@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Vidhyalaya.Migrations
 {
     [DbContext(typeof(VidhyalayaDbContext))]
-    [Migration("20240510040613_Dbcreate")]
-    partial class Dbcreate
+    [Migration("20240521035456_dbcreate")]
+    partial class dbcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,13 +21,16 @@ namespace Vidhyalaya.Migrations
 
             modelBuilder.Entity("Grade", b =>
                 {
-                    b.Property<int>("Label")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ClassTeacher")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Label")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Medium")
                         .HasColumnType("INTEGER");
@@ -39,7 +42,7 @@ namespace Vidhyalaya.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Label");
+                    b.HasKey("Id");
 
                     b.ToTable("Grades");
                 });
@@ -67,7 +70,8 @@ namespace Vidhyalaya.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("StudentId")
+                        .IsUnique();
 
                     b.ToTable("GuardianDetails");
                 });
@@ -89,7 +93,7 @@ namespace Vidhyalaya.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("GradeLabel")
+                    b.Property<int?>("GradeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsActive")
@@ -104,7 +108,7 @@ namespace Vidhyalaya.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GradeLabel");
+                    b.HasIndex("GradeId");
 
                     b.ToTable("Students");
                 });
@@ -112,8 +116,8 @@ namespace Vidhyalaya.Migrations
             modelBuilder.Entity("Guardian", b =>
                 {
                     b.HasOne("Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
+                        .WithOne("Guardian")
+                        .HasForeignKey("Guardian", "StudentId");
 
                     b.Navigation("Student");
                 });
@@ -122,9 +126,14 @@ namespace Vidhyalaya.Migrations
                 {
                     b.HasOne("Grade", "Grade")
                         .WithMany()
-                        .HasForeignKey("GradeLabel");
+                        .HasForeignKey("GradeId");
 
                     b.Navigation("Grade");
+                });
+
+            modelBuilder.Entity("Student", b =>
+                {
+                    b.Navigation("Guardian");
                 });
 #pragma warning restore 612, 618
         }

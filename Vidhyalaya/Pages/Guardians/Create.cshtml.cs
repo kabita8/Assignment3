@@ -19,15 +19,13 @@ namespace Vidhyalaya.Pages_Guardians
 
         public IActionResult OnGet()
         {
-        Students=_context.Students
-        .Select(x=> new SelectListItem {Text=x.Name, Value=x.Id.ToString()})
-        .ToList();
-        return Page();
+            ViewData["StudentId"] =new SelectList(_context.Students, "Id", "Id");
+            return Page();
         }
 
         [BindProperty]
         public Guardian Guardian { get; set; } = default!;
-        public List<SelectListItem> Students {get; set;}
+       
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()

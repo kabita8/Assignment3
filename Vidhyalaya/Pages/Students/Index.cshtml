@@ -13,9 +13,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].Name)
             </th>
-              <th>
-                ClassTeacher
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].Address)
             </th>
@@ -31,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Student[0].IsActive)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student[0].Grade)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,7 +45,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>@(item.Grade?.ClassTeacher ?? "N/A")</td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
@@ -60,6 +61,9 @@
             
             <td class ="btn btn-success">
                     @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem=> item.Grade.Id)
                 </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="bi bi-pen"></i>Edit</a> 

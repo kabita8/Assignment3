@@ -28,7 +28,7 @@ namespace Vidhyalaya.Pages_Grades
                 return NotFound();
             }
 
-            var grade =  await _context.Grades.FirstOrDefaultAsync(m => m.Label == id);
+            var grade =  await _context.Grades.FirstOrDefaultAsync(m => m.Id == id);
             if (grade == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace Vidhyalaya.Pages_Grades
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GradeExists(Grade.Label))
+                if (!GradeExists(Grade.Id))
                 {
                     return NotFound();
                 }
@@ -69,7 +69,7 @@ namespace Vidhyalaya.Pages_Grades
 
         private bool GradeExists(int id)
         {
-            return _context.Grades.Any(e => e.Label == id);
+            return _context.Grades.Any(e => e.Id== id);
         }
     }
 }

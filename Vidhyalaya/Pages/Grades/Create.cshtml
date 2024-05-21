@@ -10,6 +10,11 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Grade.Label" class="control-label"></label>
+                <input asp-for="Grade.Label" class="form-control" />
+                <span asp-validation-for="Grade.Label" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Grade.ClassTeacher" class="control-label"></label>
                 <input asp-for="Grade.ClassTeacher" class="form-control" />
                 <span asp-validation-for="Grade.ClassTeacher" class="text-danger"></span>
